@@ -1,5 +1,7 @@
 import express, { Application, json, Request, Response } from 'express'
 import cors from 'cors'
+import { config } from './config/db'
+import mongoose from 'mongoose'
 const app: Application = express()
 app.use(cors())
 app.use(json())
