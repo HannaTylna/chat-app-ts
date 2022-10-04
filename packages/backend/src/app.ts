@@ -3,10 +3,16 @@ import cors from 'cors'
 const app: Application = express()
 app.use(cors())
 app.use(json())
-const port: number = parseInt(process.env.SERVER_PORT || "3001")
+
 app.get('/', (req: Request, res: Response) => {
-res.send('Chat app📨')
+  res.send('Chat app📨')
 })
-app.listen(port, function () {
-console.log(`App is listening on port ${port} !`)
+app.listen(config.server.port, async function () {
+  await mongoose.connect(config.mongo.url).then(() => {
+    console.log('Database connected!')
+  })
+  // .catch(error){
+  //   console.log(error)
+  // }
+  console.log(`App is listening on port ${config.server.port} !`)
 })
