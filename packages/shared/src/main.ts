@@ -1,2 +1,2 @@
-export { User } from './userInterface'
-export { Message } from './messageInterface'
+export * from './userInterface'
+export * from './messageInterface'
