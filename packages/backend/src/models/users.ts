@@ -13,9 +13,4 @@ userSchema.pre<User>('save', async function (next) {
   next()
 })
 
-const UserModel = model<User>('User', userSchema)
-
-export const createNewUser = async (user: User): Promise<void> => {
-  const newUser = new UserModel(user)
-  newUser.save()
-}
+export const UserModel = model<User>('User', userSchema)
