@@ -1,7 +1,7 @@
-import express, { Response, Request } from 'express'
+import express from 'express'
+import * as userController from '../controller/user.controller'
 
 const route = express.Router()
-route.get('/', (req: Request, res: Response) => {
-  res.send('hellow')
-})
+route.use('/', userController.addANewUser)
+
 export default route
