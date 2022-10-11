@@ -24,6 +24,8 @@
   },
   "dependencies": {
     "@chat-app/shared": "^1.0.0",
+    "@types/bcrypt": "^5.0.0",
+    "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.2",
     "express": "^4.18.1",
