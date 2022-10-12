@@ -1,4 +1,4 @@
-import express, { Application, json, Request, Response } from 'express'
+import express, { Application, json } from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import { setUpMongoDb } from './models/common'
@@ -11,9 +11,9 @@ const mongoUrl: string = process.env.MONGODB_URL || 'mongodb://localhost:27017/c
 app.use(cors())
 app.use(json())
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Chat app📨')
-})
+// app.get('/', (req: Request, res: Response) => {
+//   res.send('KIKIS EXPRESS CHAT APP📨')
+// })
 
 app.use('/api', router)
 

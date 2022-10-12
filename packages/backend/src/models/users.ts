@@ -3,7 +3,7 @@ import { model, Schema } from 'mongoose'
 import bcrypt from 'bcrypt'
 
 const userSchema = new Schema({
-  username: { type: String, required: true },
+  name: { type: String, required: true },
   password: { type: String, required: true },
 })
 
@@ -14,3 +14,8 @@ userSchema.pre<User>('save', async function (next) {
 })
 
 export const UserModel = model<User>('User', userSchema)
+
+export const createUser = async (user: User): Promise<void> => {
+  const newModel = new UserModel(user)
+  newModel.save()
+}

@@ -1,25 +1,32 @@
 import { useState } from 'react'
 import ReactBubblyEffectButton from 'react-bubbly-effect-button'
 import axios from 'axios'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Alert } from 'react-bootstrap'
 import { StyledFormDiv } from '../styles/StyledFormDiv'
 
 const SignUpPage = () => {
-  const [username, setUsername] = useState<string>('')
+  const [name, setUsername] = useState<string>('')
   const [password, setPassword] = useState<string>('')
-  const [successMessage, setSuccessMessage] = useState<string>('')
+  const [message, setMessage] = useState<string>('')
 
   const performSignup = async (): Promise<void> => {
     console.log('sign up')
+    if (!name || !password) {
+      setMessage('name and password is required')
+      setTimeout(() => {
+        setMessage('')
+      }, 5000)
+    }
     const signupResponse = await axios.post('http://localhost:4000/api/users', {
-      username: username,
+      name: name,
       password: password,
     })
+    console.log(signupResponse)
     if (signupResponse && signupResponse.status === 200) {
       console.log('user created')
-      setSuccessMessage('user created successfully')
+      setMessage('user created successfully')
       setTimeout(() => {
-        setSuccessMessage('')
+        setMessage('')
       }, 5000)
       setUsername('')
       setPassword('')
@@ -31,10 +38,10 @@ const SignUpPage = () => {
         <Row>
           <Col md={{ span: 6, offset: 3 }}>
             <StyledFormDiv>
-              <label>Username</label>
+              <label>Name</label>
               <input
                 type='text'
-                value={username}
+                value={name}
                 placeholder='Enter username'
                 onChange={(e) => setUsername(e.target.value)}
               />
@@ -46,15 +53,15 @@ const SignUpPage = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
+
               <div>
                 <ReactBubblyEffectButton text='SIGN UP' bgColor='#E23D28' onClick={performSignup} />
               </div>
             </StyledFormDiv>
+            {message && <Alert variant='danger'>{message}</Alert>}
           </Col>
         </Row>
       </Container>
-
-      {successMessage && <p>{successMessage}</p>}
     </>
   )
 }

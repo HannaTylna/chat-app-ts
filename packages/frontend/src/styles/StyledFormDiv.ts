@@ -10,6 +10,7 @@ export const StyledFormDiv = styled.div`
   padding-top: 30px;
   margin-top: 100px;
   border-radius: 5px;
+  border: 2px solid rgb(220, 20, 60);
   * {
     margin: 30px;
   }
