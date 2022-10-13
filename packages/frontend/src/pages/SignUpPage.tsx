@@ -6,19 +6,21 @@ import { StyledFormDiv } from '../styles/StyledFormDiv'
 
 const SignUpPage = () => {
   const [name, setUsername] = useState<string>('')
+  const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [message, setMessage] = useState<string>('')
 
   const performSignup = async (): Promise<void> => {
     console.log('sign up')
-    if (!name || !password) {
-      setMessage('name and password is required')
+    if (!name || !password || !email) {
+      setMessage('name, mail, password are required')
       setTimeout(() => {
         setMessage('')
       }, 5000)
     }
     const signupResponse = await axios.post('http://localhost:4000/api/users', {
-      name: name,
+      username: name,
+      email: email,
       password: password,
     })
     console.log(signupResponse)
@@ -29,6 +31,7 @@ const SignUpPage = () => {
         setMessage('')
       }, 5000)
       setUsername('')
+      setEmail('')
       setPassword('')
     }
   }
@@ -44,6 +47,13 @@ const SignUpPage = () => {
                 value={name}
                 placeholder='Enter username'
                 onChange={(e) => setUsername(e.target.value)}
+              />
+              <label>Mail</label>
+              <input
+                type='email'
+                value={email}
+                placeholder='Enter mail'
+                onChange={(e) => setEmail(e.target.value)}
               />
 
               <label>Password</label>
