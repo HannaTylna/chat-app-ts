@@ -5,6 +5,7 @@ import bcrypt from 'bcrypt'
 const userSchema = new Schema({
   username: { type: String, required: true },
   password: { type: String, required: true },
+  email: { type: String, required: true },
 })
 
 userSchema.pre<User>('save', async function (next) {
@@ -14,3 +15,12 @@ userSchema.pre<User>('save', async function (next) {
 })
 
 export const UserModel = model<User>('User', userSchema)
+
+export const createUser = async (user: User): Promise<void> => {
+  const newUser = new UserModel(user)
+  const existUser = await UserModel.findOne({ email: newUser.email })
+  if (existUser) {
+    throw new Error('User already exist')
+  }
+  newUser.save()
+}
