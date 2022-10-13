@@ -1,14 +1,15 @@
 import { createUser } from '../models/users'
 import { User } from '@chat-app/shared'
 
-export const saveUser = async (user: User): Promise<User | undefined> => {
-  try {
-    if (user.name == '' || user.password == '') {
-      throw new Error('Invalid name input!')
-    }
-    await createUser(user)
-    return user
-  } catch (err) {
-    console.log(err)
+export const registerUser = async (user: User): Promise<void> => {
+  if (user.username == '' || !user.username) {
+    throw new Error('Enter username')
   }
+  if (user.email == '' || !user.email) {
+    throw new Error('Enter email')
+  }
+  if (user.password == '' || !user.password) {
+    throw new Error('Enter password')
+  }
+  await createUser(user)
 }
