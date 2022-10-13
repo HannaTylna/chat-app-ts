@@ -18,7 +18,7 @@ export const UserModel = model<User>('User', userSchema)
 
 export const createUser = async (user: User): Promise<void> => {
   const newUser = new UserModel(user)
-  const existUser = await UserModel.findOne({ email: newUser.email })
+  const existUser = await UserModel.findOne({ email: newUser.email }).exec()
   if (existUser) {
     throw new Error('User already exist')
   }
