@@ -8,9 +8,10 @@ const userSchema = new Schema({
   email: { type: String, required: true },
 })
 
-userSchema.pre<User>('save', async function (next) {
-  const hashedpassword = await bcrypt.hash(this.password, 10)
-  this.password = hashedpassword
+userSchema.pre('save', async function (next) {
+  if (this.isModified('password')) {
+    this.password = await bcrypt.hash(this.password, 10)
+  }
   next()
 })
 
@@ -18,9 +19,13 @@ export const UserModel = model<User>('User', userSchema)
 
 export const createUser = async (user: User): Promise<void> => {
   const newUser = new UserModel(user)
-  const existUser = await UserModel.findOne({ email: newUser.email }).exec()
+  const existUser = await UserModel.findOne({ _id: newUser._id }).exec()
   if (existUser) {
     throw new Error('User already exist')
   }
   newUser.save()
+}
+
+export const loadUserByUsername = async (username: string): Promise<User | null> => {
+  return await UserModel.findOne({ username: username }).exec()
 }
