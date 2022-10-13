@@ -1,5 +1,6 @@
 import { createUser, loadUserByUsername } from '../models/users'
 import { Credentials, User } from '@chat-app/shared'
+import bcrypt from 'bcrypt'
 
 export const registerUser = async (user: User): Promise<void> => {
   if (user.username == '' || !user.username) {
@@ -16,5 +17,9 @@ export const registerUser = async (user: User): Promise<void> => {
 
 export const login = async (credentials: Credentials): Promise<User | null> => {
   const userInfo = await loadUserByUsername(credentials.username)
-  return userInfo
+  if (userInfo && (await bcrypt.compare(credentials.password, userInfo.password))) {
+    return userInfo
+  } else {
+    return null
+  }
 }
