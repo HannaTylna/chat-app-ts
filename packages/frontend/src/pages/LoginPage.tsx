@@ -5,37 +5,43 @@ import { Container, Row, Col, Alert, Button } from 'react-bootstrap'
 import { StyledFormDiv } from '../styles/StyledFormDiv'
 import { useNavigate } from 'react-router-dom'
 
-const SignUpPage = () => {
+axios.defaults.baseURL = process.env.REACT_APP_CHAT_API || 'http://localhost:3000'
+axios.interceptors.request.use((config) => {
+  if (!config?.headers) {
+    config.headers = {}
+  }
+  const jwt = localStorage.getItem('chatapp')
+  if (jwt) {
+    config.headers['authorization'] = `Bearer ${jwt}`
+  }
+  return config
+})
+
+const LoginPage = () => {
   const navigate = useNavigate()
 
   const [username, setUsername] = useState<string>('')
-  const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [message, setMessage] = useState<string>('')
+  const [inlogged, setInlogged] = useState<boolean>(false)
 
-  const performSignup = async (): Promise<void> => {
+  const performLogin = async (): Promise<void> => {
     console.log('sign up')
-    if (!username || !password || !email) {
-      setMessage('name, mail, password are required')
+    if (!username || !password) {
+      setMessage('name, password are required')
       setTimeout(() => {
         setMessage('')
       }, 5000)
     }
-    const signupResponse = await axios.post('http://localhost:4000/api/users', {
+    const loginResponse = await axios.post('http://localhost:4000/api/users/login', {
       username: username,
-      email: email,
       password: password,
     })
-    console.log(signupResponse)
-    if (signupResponse && signupResponse.status === 200) {
-      console.log('user created')
-      setMessage('user created successfully')
-      setTimeout(() => {
-        setMessage('')
-      }, 5000)
-      setUsername('')
-      setEmail('')
-      setPassword('')
+    console.log(loginResponse)
+    if (loginResponse && loginResponse.status === 200) {
+      localStorage.setItem('chatapp', loginResponse.data)
+      console.log('user inlogged')
+      setInlogged(true)
     }
   }
   return (
@@ -51,13 +57,6 @@ const SignUpPage = () => {
                 placeholder='Enter username'
                 onChange={(e) => setUsername(e.target.value)}
               />
-              <label>Mail</label>
-              <input
-                type='email'
-                value={email}
-                placeholder='Enter mail'
-                onChange={(e) => setEmail(e.target.value)}
-              />
 
               <label>Password</label>
               <input
@@ -68,13 +67,13 @@ const SignUpPage = () => {
               />
 
               <div>
-                <ReactBubblyEffectButton text='SIGN UP' bgColor='#E23D28' onClick={performSignup} />
+                <ReactBubblyEffectButton text='LOG IN' bgColor='#E23D28' onClick={performLogin} />
               </div>
 
               <p>
-                already user?
-                <Button variant='info' onClick={() => navigate('/login')}>
-                  login
+                not signup yet?
+                <Button variant='info' onClick={() => navigate('/signup')}>
+                  signup
                 </Button>
               </p>
             </StyledFormDiv>
@@ -82,7 +81,8 @@ const SignUpPage = () => {
           </Col>
         </Row>
       </Container>
+      {inlogged ? navigate('/home') : ''}
     </>
   )
 }
-export default SignUpPage
+export default LoginPage
