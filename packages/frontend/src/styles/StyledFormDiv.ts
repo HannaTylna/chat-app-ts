@@ -8,17 +8,18 @@ export const StyledFormDiv = styled.div`
   background-repeat: no-repeat;
   background-size: cover; */
   padding-top: 30px;
-  margin-top: 100px;
+  margin-top: 20px;
   border-radius: 5px;
   border: 2px solid rgb(220, 20, 60);
   * {
-    margin: 30px;
+    margin: 10px;
   }
   input {
     padding: 8px;
+    margin: 0 80px 0 80px;
   }
   label {
-    margin: 0;
+    margin: 80opx;
   }
   button {
     margin-top: 10px;

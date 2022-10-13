@@ -4,6 +4,7 @@ import axios from 'axios'
 import { Container, Row, Col, Alert, Button } from 'react-bootstrap'
 import { StyledFormDiv } from '../styles/StyledFormDiv'
 import { useNavigate } from 'react-router-dom'
+import { H1 } from '../styles/StyledH1'
 
 const SignUpPage = () => {
   const navigate = useNavigate()
@@ -40,6 +41,7 @@ const SignUpPage = () => {
   }
   return (
     <>
+      <H1>KIKI EXPRESS CHAT APP 📨</H1>
       <Container>
         <Row>
           <Col md={{ span: 6, offset: 3 }}>
