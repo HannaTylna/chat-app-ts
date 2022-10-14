@@ -33,3 +33,6 @@ export const loginUser = async (req: JwtRequest<Credentials>, res: Response) => 
   const token = createJwtToken(credentials)
   res.status(200).json({ token })
 }
+export function addNewMsg(arg0: string, addNewMsg: any) {
+  throw new Error('Function not implemented.')
+}

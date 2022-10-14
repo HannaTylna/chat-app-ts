@@ -7,7 +7,7 @@ export const registerMessage = async (message: Message): Promise<void> => {
   }
 
   // TODO message sender is neccessary?
-  message.sender = '63487328525553a7cc539fff'
+  // message.sender = '63487328525553a7cc539fff'
 
   await postMessage(message)
 }

@@ -11,7 +11,7 @@ export interface JwtRequest<T> extends Request<T> {
 }
 
 export function createJwtToken(payload: JwtPayload) {
-  const token: string = jwt.sign(payload, secret, { expiresIn: '1800s' })
+  const token: string = jwt.sign(payload, secret, { expiresIn: '24h' }) // TOTO change to 1800s when project is done
   return token
 }
 
