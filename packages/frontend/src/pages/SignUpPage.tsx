@@ -28,15 +28,12 @@ const SignUpPage = () => {
       password: password,
     })
     console.log(signupResponse)
-    if (signupResponse && signupResponse.status === 200) {
+    if (signupResponse.status === 201) {
       console.log('user created')
       setMessage('user created successfully')
       setTimeout(() => {
-        setMessage('')
-      }, 5000)
-      setUsername('')
-      setEmail('')
-      setPassword('')
+        navigate('/login')
+      }, 3000)
     }
   }
   return (

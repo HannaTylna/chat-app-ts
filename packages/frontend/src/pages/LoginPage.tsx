@@ -40,9 +40,11 @@ const LoginPage = () => {
     })
     console.log(loginResponse)
     if (loginResponse && loginResponse.status === 200) {
-      localStorage.setItem('chatapp', loginResponse.data)
+      localStorage.setItem('chatapp', loginResponse.data.token)
+      console.log(loginResponse.data)
       console.log('user inlogged')
       setInlogged(true)
+      navigate('/chatroom')
     }
   }
   return (
@@ -79,11 +81,11 @@ const LoginPage = () => {
                 </Button>
               </p>
             </StyledFormDiv>
-            {message && <Alert variant='danger'>{message}</Alert>}
           </Col>
+          <Col md={4}>{message && <Alert variant='danger'>{message}</Alert>}</Col>
         </Row>
       </Container>
-      {inlogged ? navigate('/home') : ''}
+      {/* {inlogged ? navigate('/home') : ''} */}
     </>
   )
 }

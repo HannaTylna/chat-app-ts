@@ -20,24 +20,24 @@ export default function HomePage() {
   //   return response.data
   // }
 
-  const fetchUsers = async (): Promise<User[]> => {
-    const response = await axios.get<User[]>('http://localhost:4000/api/users')
-    console.log(response.data)
-    return response.data
-  }
-  useEffect(() => {
-    // fetchMessages()
-    //   .then(setMessages)
-    //   .catch((error) => {
-    //     setMessages([])
-    //     setError('Something went wrong when fetching messages...')
-    //   })
-    fetchUsers()
-      .then(setUsers)
-      .catch((err) => {
-        setUsers([])
-      })
-  }, [])
+  // const fetchUsers = async (): Promise<User[]> => {
+  //   const response = await axios.get<User[]>('http://localhost:4000/api/users')
+  //   console.log(response.data)
+  //   return response.data
+  // }
+  // useEffect(() => {
+  //   // fetchMessages()
+  //   //   .then(setMessages)
+  //   //   .catch((error) => {
+  //   //     setMessages([])
+  //   //     setError('Something went wrong when fetching messages...')
+  //   //   })
+  //   fetchUsers()
+  //     .then(setUsers)
+  //     .catch((err) => {
+  //       setUsers([])
+  //     })
+  // }, [])
 
   return (
     <Container className='chat-main g-0'>

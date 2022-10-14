@@ -11,3 +11,8 @@ const messageSchema = new Schema({
   },
 })
 const MessageModel = model<Message>('Message', messageSchema)
+
+export const postMessage = async (message: Message): Promise<void> => {
+  const newMessage = new MessageModel(message)
+  newMessage.save()
+}
