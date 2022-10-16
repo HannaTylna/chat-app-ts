@@ -27,12 +27,11 @@ export const addANewUser = async (req: Request, res: Response) => {
 export const loginUser = async (req: JwtRequest<Credentials>, res: Response) => {
   const credentials = req.body
   const userInfo = await login(credentials)
+  console.log('userInfo', userInfo)
   if (!userInfo) {
     return res.sendStatus(403)
   }
-  const token = createJwtToken(credentials)
-  res.status(200).json({ token })
-}
-export function addNewMsg(arg0: string, addNewMsg: any) {
-  throw new Error('Function not implemented.')
+  const token = createJwtToken({ sub: userInfo.username, username: userInfo.username })
+  // res.status(200).json({ token })
+  res.status(200).send({ token: token, userId: userInfo._id })
 }

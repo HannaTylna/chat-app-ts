@@ -29,3 +29,8 @@ export const createUser = async (user: User): Promise<void> => {
 export const loadUserByUsername = async (username: string): Promise<User | null> => {
   return await UserModel.findOne({ username: username }).exec()
 }
+export const loadUser = async (username: string): Promise<string | undefined> => {
+  const user = await UserModel.findOne({ username: username }).exec()
+  const id: string | undefined = user?._id
+  return id
+}
