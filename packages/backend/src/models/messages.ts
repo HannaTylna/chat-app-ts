@@ -10,4 +10,4 @@ const messageSchema = new Schema({
     required: true,
   },
 })
-const MessageModel = model<Message>('Message', messageSchema)
+export const MessageModel = model<Message>('Message', messageSchema)
