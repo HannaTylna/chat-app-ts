@@ -3,7 +3,7 @@ import { UserModel } from '../models/users'
 import { Message } from '@chat-app/shared'
 
 export const allMessages = async (): Promise<Message[]> => {
-  return MessageModel.find().exec()
+  return MessageModel.find().populate('sender').exec()
 }
 
 export const createANewMessage = async (
