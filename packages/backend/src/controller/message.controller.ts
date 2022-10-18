@@ -13,12 +13,13 @@ export const getAllMessages = async (req: Request, res: Response) => {
 
 export const newMessage = async (req: JwtRequest<string>, res: Response) => {
   try {
+    const message = req.body.text
     const currentUser = req.jwt?.username
-    if (req.body.text == '') {
+    if (message == '') {
       res.status(400)
     }
-    const newMessage = await createANewMessage(currentUser, req.body.text)
-    res.status(200).json({ newMessage, currentUser })
+    await createANewMessage(currentUser, message)
+    res.status(200).json({ message, currentUser })
   } catch (error) {
     res.status(400).json(error)
   }
