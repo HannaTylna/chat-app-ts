@@ -10,6 +10,5 @@ export const createANewMessage = async (
   message: string,
 ): Promise<void> => {
   const newToDo = new MessageModel({ text: message, sender: currentUser })
-  if (message == '') throw new Error('Message is required')
   await newToDo.save()
 }
