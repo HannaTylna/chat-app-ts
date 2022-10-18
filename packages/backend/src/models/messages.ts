@@ -1,13 +1,9 @@
-import { model, Schema } from 'mongoose'
+import mongoose from 'mongoose'
 import { Message } from '@chat-app/shared'
 
-const messageSchema = new Schema({
-  text: String,
+const messageSchema = new mongoose.Schema({
+  text: { type: String, required: true },
   timeStamp: Date,
-  sender: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-    required: true,
-  },
+  sender: { type: String },
 })
-export const MessageModel = model<Message>('Message', messageSchema)
+export const MessageModel = mongoose.model<Message>('Message', messageSchema)
