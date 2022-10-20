@@ -8,28 +8,38 @@ import { StyledFormDiv } from '../styles/StyledFormDiv'
 
 const SignUpPage = () => {
   const navigate = useNavigate()
-
   const [username, setUsername] = useState<string>('')
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [message, setMessage] = useState<string>('')
+  const [mailerror, setMailError] = useState<string | null>()
+
+  function isValidEmail(email: string) {
+    return /\S+@\S+\.\S+/.test(email)
+  }
+  const handleMailChange = (event: any) => {
+    if (!isValidEmail(event.target.value)) {
+      setMailError('Email is invalid')
+    } else {
+      setMailError('')
+    }
+    setEmail(event.target.value)
+  }
 
   const performSignup = async (): Promise<void> => {
-    console.log('sign up')
     if (!username || !password || !email) {
       setMessage('name, mail, password are required')
       setTimeout(() => {
         setMessage('')
       }, 5000)
     }
-    const signupResponse = await axios.post('http://localhost:4000/api/users', {
+    const signupResponse = await axios.post(`${process.env.REACT_APP_CHAT_API}/api/users`, {
       username: username,
       email: email,
       password: password,
     })
-    console.log(signupResponse)
+
     if (signupResponse.status === 201) {
-      console.log('user created')
       setMessage('user created successfully')
       setTimeout(() => {
         navigate('/login')
@@ -52,11 +62,12 @@ const SignUpPage = () => {
                 onChange={(e) => setUsername(e.target.value)}
               />
               <label>Mail</label>
+              <span>{mailerror}</span>
               <input
                 type='email'
                 value={email}
                 placeholder='Enter mail'
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={handleMailChange}
               />
 
               <label>Password</label>
