@@ -43,6 +43,7 @@ const SignUpPage = () => {
         <Row>
           <Col md={{ span: 6, offset: 3 }}>
             <StyledFormDiv>
+              <h2>SIGN UP</h2>
               <label>Username</label>
               <input
                 type='text'
