@@ -1,7 +1,6 @@
 import { Request, Response } from 'express'
 import { allMessages, createANewMessage } from '../services/message.services'
 import { JwtRequest } from '../middleware/auth'
-import { send } from 'process'
 
 export const getAllMessages = async (req: Request, res: Response) => {
   try {
