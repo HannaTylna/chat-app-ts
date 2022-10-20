@@ -4,6 +4,7 @@ import axios from 'axios'
 import { Container, Row, Col, Alert, Button } from 'react-bootstrap'
 
 import { useNavigate } from 'react-router-dom'
+import { StyledFormDiv } from '../styles/StyledFormDiv'
 
 const SignUpPage = () => {
   const navigate = useNavigate()
@@ -41,42 +42,43 @@ const SignUpPage = () => {
       <Container>
         <Row>
           <Col md={{ span: 6, offset: 3 }}>
-            <label>Username</label>
-            <input
-              type='text'
-              value={username}
-              placeholder='Enter username'
-              onChange={(e) => setUsername(e.target.value)}
-            />
-            <label>Mail</label>
-            <input
-              type='email'
-              value={email}
-              placeholder='Enter mail'
-              onChange={(e) => setEmail(e.target.value)}
-            />
+            <StyledFormDiv>
+              <label>Username</label>
+              <input
+                type='text'
+                value={username}
+                placeholder='Enter username'
+                onChange={(e) => setUsername(e.target.value)}
+              />
+              <label>Mail</label>
+              <input
+                type='email'
+                value={email}
+                placeholder='Enter mail'
+                onChange={(e) => setEmail(e.target.value)}
+              />
 
-            <label>Password</label>
-            <input
-              type='password'
-              placeholder='Password'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+              <label>Password</label>
+              <input
+                type='password'
+                placeholder='Password'
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
 
-            <div>
-              <ReactBubblyEffectButton text='SIGN UP' bgColor='#E23D28' onClick={performSignup} />
-            </div>
+              <div>
+                <ReactBubblyEffectButton text='SIGN UP' bgColor='#E23D28' onClick={performSignup} />
+              </div>
 
-            <p>
-              already user?
-              <Button variant='info' onClick={() => navigate('/login')}>
-                login
-              </Button>
-            </p>
-
-            {message && <Alert variant='danger'>{message}</Alert>}
+              <p>
+                already user?
+                <Button variant='info' onClick={() => navigate('/login')}>
+                  login
+                </Button>
+              </p>
+            </StyledFormDiv>
           </Col>
+          <Col md={2}>{message && <Alert variant='danger'>{message}</Alert>}</Col>
         </Row>
       </Container>
     </>
