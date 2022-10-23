@@ -2,4 +2,4 @@ packages/frontend/node_modules
 packages/frontend/build
 packages/backend/node_modules
 packages/backend/dist
-packages/node_modules
+node_modules
