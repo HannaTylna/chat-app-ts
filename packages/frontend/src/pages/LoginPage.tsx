@@ -61,7 +61,7 @@ const LoginPage = () => {
 
               <p>
                 not signup yet?
-                <Button variant='info' onClick={() => navigate('/signup')}>
+                <Button variant='info' onClick={() => navigate('/')}>
                   signup
                 </Button>
               </p>

@@ -11,7 +11,7 @@ function App() {
       <h1>frontend</h1>
 
       <Routes>
-        <Route path='/signup' element={<SignUpPage />} />
+        <Route path='/' element={<SignUpPage />} />
         <Route path='/login' element={<LoginPage />} />
       </Routes>
     </div>
