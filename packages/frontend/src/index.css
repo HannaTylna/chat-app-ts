@@ -6,7 +6,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background: linear-gradient(to right, #1fddff, #ff4b1f);
 }
-
+.right {
+  display: flex;
+  justify-content: right;
+  align-items: right;
+}
+.left {
+  display: flex;
+  justify-content: left;
+  align-items: left;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }

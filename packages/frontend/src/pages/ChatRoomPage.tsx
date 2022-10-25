@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { Message } from '../../../shared/src/messageInterface'
 import axios from 'axios'
 import { Col, Container, Row } from 'react-bootstrap'
+import SimpleBar from 'simplebar-react'
+import '../index.css'
 
 interface messageType {
   text: string
@@ -18,65 +20,62 @@ axios.interceptors.request.use((config) => {
   return config
 })
 
-const fetchMessages = async (): Promise<Message[]> => {
-  const response = await axios.get<Message[]>('/api/messages/')
-  return response.data
-}
-
 export default function ChatRoomPage() {
   const [messages, setMessages] = useState<Message[]>([])
   const [message, setMessage] = useState('')
   const [error, setError] = useState<string | undefined>()
-
-  console.log(messages)
-
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     fetchMessages()
-  //       .then(setMessages)
-  //       .catch((error) => {
-  //         setMessages([])
-  //         setError('failed to fetch messages')
-  //       })
-  //   }, 1000000) // TODO back 1000
-  //   return () => clearInterval(interval)
-  // }, [])
+  const [currentUser, setCurrentUser] = useState<string>('')
 
   useEffect(() => {
-    fetchMessages()
-      .then(setMessages)
-      .catch((error) => {
-        setMessages([])
-        setError('failed to fetch messages')
-      })
+    const interval = setInterval(() => {
+      fetchMessages()
+        .then(setMessages)
+        .catch((error) => {
+          setMessages([])
+          setError('failed to fetch messages')
+        })
+    }, 5000) // TODO back 1000
+    return () => clearInterval(interval)
   }, [])
+  const fetchMessages = async (): Promise<Message[]> => {
+    const response = await axios.get<Message[]>('/api/messages/')
+    return response.data
+  }
+  // useEffect(() => {
+  //   fetchMessages()
+  //     .then(setMessages)
+  //     .catch((error) => {
+  //       setMessages([])
+  //       setError('failed to fetch messages')
+  //     })
+  // }, [])
 
   const sendMessage = async () => {
     setMessage('')
     const msg: messageType = {
       text: message,
     }
-    await axios.post('/api/messages/send', msg)
+    const response = await axios.post('/api/messages/send', msg)
+    setCurrentUser(response.data.currentUser)
   }
 
+  const MessageItem = (props: { message: any }) => {
+    return (
+      <div className={props.message.sender === currentUser ? 'right' : 'left'}>
+        <span>{props.message.text}</span>
+        <p>sender:{props.message.sender}</p>
+      </div>
+    )
+  }
   return (
     <Container>
+      <SimpleBar style={{ height: '80%' }}>
+        {messages.map((message) => {
+          return <MessageItem key={message._id} message={message} />
+        })}
+      </SimpleBar>
+
       <Row>
-        <Col md={12}>
-          {messages.map((item) => {
-            return (
-              <div key={item._id}>
-                <i>
-                  <span>{item.sender}:</span>
-                </i>
-                <span>{item.text}</span>
-                <span>{item.createdAt}</span>
-              </div>
-            )
-          })}
-        </Col>
-      </Row>
-      <Row className='align-items-end'>
         <Col>
           <input value={message} onChange={(e) => setMessage(e.target.value)} />
           <button onClick={sendMessage}>send</button>
