@@ -5,17 +5,19 @@ import LoginPage from './pages/LoginPage'
 
 import SignUpPage from './pages/SignUpPage'
 import ChatRoomPage from './pages/ChatRoomPage'
+import { Container } from 'react-bootstrap'
 
 function App() {
   return (
     <div className='App'>
       <h1>frontend</h1>
-
-      <Routes>
-        <Route path='/' element={<SignUpPage />} />
-        <Route path='/login' element={<LoginPage />} />
-        <Route path='/chatroom' element={<ChatRoomPage />} />
-      </Routes>
+      <Container>
+        <Routes>
+          <Route path='/' element={<SignUpPage />} />
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='/chatroom' element={<ChatRoomPage />} />
+        </Routes>
+      </Container>
     </div>
   )
 }

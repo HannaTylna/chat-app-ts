@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { Message } from '../../../shared/src/messageInterface'
 import axios from 'axios'
+import { Col, Container, Row } from 'react-bootstrap'
 
 interface messageType {
   text: string
 }
-
+axios.defaults.baseURL = process.env.REACT_APP_CHAT_API || 'http://localhost:4000'
 axios.interceptors.request.use((config) => {
   if (!config?.headers) {
     config.headers = {}
@@ -18,7 +19,7 @@ axios.interceptors.request.use((config) => {
 })
 
 const fetchMessages = async (): Promise<Message[]> => {
-  const response = await axios.get<Message[]>(`${process.env.REACT_APP_CHAT_API}/api/messages/`)
+  const response = await axios.get<Message[]>('/api/messages/')
   return response.data
 }
 
@@ -29,16 +30,25 @@ export default function ChatRoomPage() {
 
   console.log(messages)
 
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     fetchMessages()
+  //       .then(setMessages)
+  //       .catch((error) => {
+  //         setMessages([])
+  //         setError('failed to fetch messages')
+  //       })
+  //   }, 1000000) // TODO back 1000
+  //   return () => clearInterval(interval)
+  // }, [])
+
   useEffect(() => {
-    const interval = setInterval(() => {
-      fetchMessages()
-        .then(setMessages)
-        .catch((error) => {
-          setMessages([])
-          setError('failed to fetch messages')
-        })
-    }, 1000)
-    return () => clearInterval(interval)
+    fetchMessages()
+      .then(setMessages)
+      .catch((error) => {
+        setMessages([])
+        setError('failed to fetch messages')
+      })
   }, [])
 
   const sendMessage = async () => {
@@ -46,28 +56,32 @@ export default function ChatRoomPage() {
     const msg: messageType = {
       text: message,
     }
-    await axios.post(`${process.env.REACT_APP_CHAT_API}/api/messages/send`, msg)
+    await axios.post('/api/messages/send', msg)
   }
 
   return (
-    <div>
-      <div>
-        {messages.map((item) => {
-          return (
-            <div key={item._id}>
-              <i>
-                <span>{item.sender}:</span>
-              </i>
-              <span>{item.text}</span>
-              <span>{item.createdAt}</span>
-            </div>
-          )
-        })}
-      </div>
-      <div>
-        <input value={message} onChange={(e) => setMessage(e.target.value)} />
-        <button onClick={sendMessage}>send</button>
-      </div>
-    </div>
+    <Container>
+      <Row>
+        <Col md={12}>
+          {messages.map((item) => {
+            return (
+              <div key={item._id}>
+                <i>
+                  <span>{item.sender}:</span>
+                </i>
+                <span>{item.text}</span>
+                <span>{item.createdAt}</span>
+              </div>
+            )
+          })}
+        </Col>
+      </Row>
+      <Row className='align-items-end'>
+        <Col>
+          <input value={message} onChange={(e) => setMessage(e.target.value)} />
+          <button onClick={sendMessage}>send</button>
+        </Col>
+      </Row>
+    </Container>
   )
 }
