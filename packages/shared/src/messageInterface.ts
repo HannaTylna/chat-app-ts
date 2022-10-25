@@ -3,4 +3,5 @@ export interface Message {
   text: string
   timeStamp: Date
   sender: string
+  createdAt: string
 }

@@ -27,6 +27,8 @@ export default function ChatRoomPage() {
   const [message, setMessage] = useState('')
   const [error, setError] = useState<string | undefined>()
 
+  console.log(messages)
+
   useEffect(() => {
     setInterval(() => {
       fetchMessages()
@@ -56,6 +58,7 @@ export default function ChatRoomPage() {
                 <span>{item.sender}:</span>
               </i>
               <span>{item.text}</span>
+              <span>{item.createdAt}</span>
             </div>
           )
         })}
