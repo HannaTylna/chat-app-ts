@@ -10,7 +10,6 @@ import { Container } from 'react-bootstrap'
 function App() {
   return (
     <div className='App'>
-      <h1>frontend</h1>
       <Container>
         <Routes>
           <Route path='/' element={<SignUpPage />} />

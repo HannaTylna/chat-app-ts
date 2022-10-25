@@ -6,16 +6,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background: linear-gradient(to right, #1fddff, #ff4b1f);
 }
-.right {
-  display: flex;
-  justify-content: right;
-  align-items: right;
-}
-.left {
-  display: flex;
-  justify-content: left;
-  align-items: left;
-}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+.chat-main {
+  background-image: url('https://images.unsplash.com/photo-1477414348463-c0eb7f1359b6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjU5fHxuYXR1cmV8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60');
+  /* background-repeat: no-repeat; */
+  background-size: cover;
+  border-radius: 10px;
+  margin: 50px;
 }

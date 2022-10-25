@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Message } from '../../../shared/src/messageInterface'
 import axios from 'axios'
-import { Col, Container, Row } from 'react-bootstrap'
+import { Button, Col, Container, Form, InputGroup, Row } from 'react-bootstrap'
 import SimpleBar from 'simplebar-react'
 import '../index.css'
+import 'simplebar-react/dist/simplebar.min.css'
 
 interface messageType {
   text: string
@@ -34,21 +35,13 @@ export default function ChatRoomPage() {
           setMessages([])
           setError('failed to fetch messages')
         })
-    }, 5000) // TODO back 1000
+    }, 2000) // TODO back 1000
     return () => clearInterval(interval)
   }, [])
   const fetchMessages = async (): Promise<Message[]> => {
     const response = await axios.get<Message[]>('/api/messages/')
     return response.data
   }
-  // useEffect(() => {
-  //   fetchMessages()
-  //     .then(setMessages)
-  //     .catch((error) => {
-  //       setMessages([])
-  //       setError('failed to fetch messages')
-  //     })
-  // }, [])
 
   const sendMessage = async () => {
     setMessage('')
@@ -61,15 +54,36 @@ export default function ChatRoomPage() {
 
   const MessageItem = (props: { message: any }) => {
     return (
-      <div className={props.message.sender === currentUser ? 'right' : 'left'}>
-        <span>{props.message.text}</span>
-        <p>sender:{props.message.sender}</p>
-      </div>
+      <>
+        {props.message.sender === currentUser ? (
+          <Row className='m-1'>
+            <Col className='bg-info rounded' md={{ offset: 7 }}>
+              <p className='fw-light m-1' style={{ textAlign: 'right' }}>
+                {props.message.sender}
+              </p>
+              <p className='fs-5 m-0' style={{ textAlign: 'left' }}>
+                {props.message.text}
+              </p>
+            </Col>
+          </Row>
+        ) : (
+          <Row className='m-1'>
+            <Col className='bg-light rounded' md={{ span: 5 }}>
+              <p className='fw-light m-1' style={{ textAlign: 'left' }}>
+                {props.message.sender}
+              </p>
+              <p className='fs-5 m-0' style={{ textAlign: 'right' }}>
+                {props.message.text}
+              </p>
+            </Col>
+          </Row>
+        )}
+      </>
     )
   }
   return (
-    <Container>
-      <SimpleBar style={{ height: '80%' }}>
+    <Container className='chat-main'>
+      <SimpleBar style={{ height: 500 }} className='pl-5 pr-5'>
         {messages.map((message) => {
           return <MessageItem key={message._id} message={message} />
         })}
@@ -77,8 +91,18 @@ export default function ChatRoomPage() {
 
       <Row>
         <Col>
-          <input value={message} onChange={(e) => setMessage(e.target.value)} />
-          <button onClick={sendMessage}>send</button>
+          {error && error}
+          <InputGroup>
+            <Form.Control
+              placeholder='what are you thinking'
+              type='text'
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+            />
+            <Button variant='danger' onClick={sendMessage}>
+              send
+            </Button>
+          </InputGroup>
         </Col>
       </Row>
     </Container>
