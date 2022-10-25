@@ -30,7 +30,7 @@ export default function ChatRoomPage() {
   console.log(messages)
 
   useEffect(() => {
-    setInterval(() => {
+    const interval = setInterval(() => {
       fetchMessages()
         .then(setMessages)
         .catch((error) => {
@@ -38,6 +38,7 @@ export default function ChatRoomPage() {
           setError('failed to fetch messages')
         })
     }, 1000)
+    return () => clearInterval(interval)
   }, [])
 
   const sendMessage = async () => {
