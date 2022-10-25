@@ -4,7 +4,6 @@ import { Message } from '@chat-app/shared'
 const messageSchema = new mongoose.Schema(
   {
     text: { type: String, required: true },
-    // timeStamp: Date,
     sender: { type: String },
   },
   {
