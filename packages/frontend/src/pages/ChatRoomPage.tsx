@@ -56,23 +56,19 @@ export default function ChatRoomPage() {
     return (
       <>
         {props.message.sender === currentUser ? (
-          <Row className='m-1'>
-            <Col className='bg-info rounded' md={{ offset: 7 }}>
-              <p className='fw-light m-1' style={{ textAlign: 'right' }}>
-                {props.message.sender}
-              </p>
-              <p className='fs-5 m-0' style={{ textAlign: 'left' }}>
+          <Row className='m-3'>
+            <Col className='bg-info rounded' md={{ offset: 8 }}>
+              <p className='fw-light bubble-right'>{props.message.sender}</p>
+              <p className='fs-5' style={{ textAlign: 'left' }}>
                 {props.message.text}
               </p>
             </Col>
           </Row>
         ) : (
-          <Row className='m-1'>
-            <Col className='bg-light rounded' md={{ span: 5 }}>
-              <p className='fw-light m-1' style={{ textAlign: 'left' }}>
-                {props.message.sender}
-              </p>
-              <p className='fs-5 m-0' style={{ textAlign: 'right' }}>
+          <Row className='m-3'>
+            <Col className='bg-light rounded' md={{ span: 4 }}>
+              <p className='fw-light bubble-left'>{props.message.sender}</p>
+              <p className='fs-5' style={{ textAlign: 'right' }}>
                 {props.message.text}
               </p>
             </Col>
@@ -83,7 +79,7 @@ export default function ChatRoomPage() {
   }
   return (
     <Container className='chat-main'>
-      <SimpleBar style={{ height: 500 }} className='pl-5 pr-5'>
+      <SimpleBar style={{ height: 800 }} className='pl-5 pr-5'>
         {messages.map((message) => {
           return <MessageItem key={message._id} message={message} />
         })}
