@@ -20,5 +20,3 @@ export const newMessage = async (req: JwtRequest<string>, res: Response) => {
     res.status(400).json(error)
   }
 }
-
-// blablabla
