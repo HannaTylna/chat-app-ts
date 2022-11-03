@@ -7,11 +7,17 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+  eslint_job:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Install modules
-        run: npm install -w packages/backend
-        run: npm install -w packages/frontend
-      - name: Run ESLint
-        run: npm run lint -w packages/backend
-        run: npm run lint -w packages/frontend
+      - uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm install
+      - name: Run ESLint on backend
+        run: |
+          cd packages/backend
+          npm run lint
+      - name: Run ESLint on frontend
+        run: |
+          cd packages/frontend
+          npm run lint
