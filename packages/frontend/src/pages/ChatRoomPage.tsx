@@ -9,17 +9,6 @@ import 'simplebar-react/dist/simplebar.min.css'
 interface messageType {
   text: string
 }
-axios.defaults.baseURL = process.env.REACT_APP_CHAT_API || 'http://localhost:4000'
-axios.interceptors.request.use((config) => {
-  if (!config?.headers) {
-    config.headers = {}
-  }
-  const jwt = localStorage.getItem('chatapp')
-  if (jwt) {
-    config.headers['authorization'] = `Bearer ${jwt}`
-  }
-  return config
-})
 
 export default function ChatRoomPage() {
   const [messages, setMessages] = useState<Message[]>([])

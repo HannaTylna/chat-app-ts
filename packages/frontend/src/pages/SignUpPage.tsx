@@ -33,7 +33,7 @@ const SignUpPage = () => {
         setMessage('')
       }, 5000)
     }
-    const signupResponse = await axios.post(`${process.env.REACT_APP_CHAT_API}/api/users`, {
+    const signupResponse = await axios.post('/api/users', {
       username: username,
       email: email,
       password: password,
