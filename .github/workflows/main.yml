@@ -16,10 +16,10 @@ jobs:
         with:
           node-version: '16.x'
       - name: Install packages
-        working-directory: backend
+        working-directory: packages/backend
         run: npm ci
       - name: Linting and tests
-        working-directory: backend
+        working-directory: packages/backend
         run: |
           npm run lint
           npm run test
