@@ -37,16 +37,18 @@ function LoginPage() {
           <Col md={{ span: 6, offset: 3 }}>
             <StyledFormDiv>
               <h2>LOG IN</h2>
-              <label>Username</label>
+              <label htmlFor='username'>Username</label>
               <input
+                id='username'
                 type='text'
                 value={username}
                 placeholder='Enter username'
                 onChange={(e) => setUsername(e.target.value)}
               />
 
-              <label>Password</label>
+              <label htmlFor='password'>Password</label>
               <input
+                id='password'
                 type='password'
                 placeholder='Password'
                 value={password}

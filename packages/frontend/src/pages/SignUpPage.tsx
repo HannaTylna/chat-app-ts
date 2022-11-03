@@ -55,24 +55,27 @@ function SignUpPage() {
           <Col md={{ span: 6, offset: 3 }}>
             <StyledFormDiv>
               <h2>SIGN UP</h2>
-              <label>Username</label>
+              <label htmlFor='username'>Username</label>
               <input
+                id='username'
                 type='text'
                 value={username}
                 placeholder='Enter username'
                 onChange={(e) => setUsername(e.target.value)}
               />
-              <label>Mail</label>
+              <label htmlFor='email'>Email</label>
               <span>{mailerror}</span>
               <input
+                id='email'
                 type='email'
                 value={email}
                 placeholder='Enter mail'
                 onChange={handleMailChange}
               />
 
-              <label>Password</label>
+              <label htmlFor='password'>Password</label>
               <input
+                id='password'
                 type='password'
                 placeholder='Password'
                 value={password}
