@@ -10,7 +10,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install modules
-        run: npm install
+        run: npm install -w packages/backend
+        run: npm install -w packages/frontend
       - name: Run ESLint
         run: npm run lint -w packages/backend
         run: npm run lint -w packages/frontend
