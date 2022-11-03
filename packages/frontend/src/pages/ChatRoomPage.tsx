@@ -35,7 +35,7 @@ export default function ChatRoomPage() {
 
   const getCurrentUser = async (): Promise<void> => {
     const response = await axios.get('/api/users/userInfo')
-    console.log(response.data.username)
+
     setCurrentUser(response.data.username)
   }
 
@@ -48,24 +48,30 @@ export default function ChatRoomPage() {
   }
 
   const MessageItem = (props: { message: any }) => {
+    const datetime = new Date(props.message.createdAt)
+    const formatedDatetime =
+      datetime.getHours() + ':' + datetime.getMinutes() + ', ' + datetime.toDateString()
+
     return (
       <>
         {props.message.sender === currentUser ? (
           <Row className='m-3'>
             <Col className='bg-info rounded' md={{ offset: 8 }}>
-              <p className='fw-light bubble-right'>{props.message.sender}</p>
+              <p className='fw-light bubble-right mt-1'>{props.message.sender}</p>
               <p className='fs-5' style={{ textAlign: 'left' }}>
                 {props.message.text}
               </p>
+              <small>{formatedDatetime}</small>
             </Col>
           </Row>
         ) : (
           <Row className='m-3'>
             <Col className='bg-light rounded' md={{ span: 4 }}>
-              <p className='fw-light bubble-left'>{props.message.sender}</p>
+              <p className='fw-light bubble-left mt-1'>{props.message.sender}</p>
               <p className='fs-5' style={{ textAlign: 'right' }}>
                 {props.message.text}
               </p>
+              <small>{formatedDatetime}</small>
             </Col>
           </Row>
         )}
