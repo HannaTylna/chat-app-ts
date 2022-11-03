@@ -5,20 +5,21 @@ on:
   pull_request:
     branches: ['main']
 jobs:
-  build_job:
-    runs-on: ubuntu-latest
-  eslint_job:
+  backend:
+    name: Backend service
     runs-on: ubuntu-latest
     steps:
-      - name: Checking code
-        uses: actions/checkout@v3
-      - name: Install dependencies
-        run: npm install
-      - name: Run ESLint on backend
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+      - name: Install packages
+        working-directory: backend
+        run: npm ci
+      - name: Linting and tests
+        working-directory: backend
         run: |
-          cd packages/backend
           npm run lint
-      - name: Run ESLint on frontend
-        run: |
-          cd packages/frontend
-          npm run lint
+          npm run test
