@@ -4,10 +4,9 @@
     "airbnb-typescript",
     "airbnb/hooks",
     "plugin:@typescript-eslint/recommended",
-    "plugin:jest/recommended",
-    "plugin:prettier/recommended"
+    "plugin:jest/recommended"
   ],
-  "plugins": ["react", "prettier", "@typescript-eslint", "jest"],
+  "plugins": ["react", "@typescript-eslint", "jest"],
   "env": {
     "browser": true,
     "es6": true,
