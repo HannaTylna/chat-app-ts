@@ -6,7 +6,7 @@ import { Container, Row, Col, Alert, Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { StyledFormDiv } from '../styles/StyledFormDiv'
 
-const SignUpPage = () => {
+function SignUpPage() {
   const navigate = useNavigate()
   const [username, setUsername] = useState<string>('')
   const [email, setEmail] = useState<string>('')
@@ -34,9 +34,9 @@ const SignUpPage = () => {
       }, 5000)
     }
     const signupResponse = await axios.post(`${process.env.REACT_APP_CHAT_API}/api/users`, {
-      username: username,
-      email: email,
-      password: password,
+      username,
+      email,
+      password,
     })
 
     if (signupResponse.status === 201) {

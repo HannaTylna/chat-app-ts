@@ -1,11 +1,11 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import ReactBubblyEffectButton from 'react-bubbly-effect-button'
 import axios from 'axios'
 import { Container, Row, Col, Alert, Button } from 'react-bootstrap'
-import { StyledFormDiv } from '../styles/StyledFormDiv'
 import { useNavigate } from 'react-router-dom'
+import { StyledFormDiv } from '../styles/StyledFormDiv'
 
-const LoginPage = () => {
+function LoginPage() {
   const navigate = useNavigate()
 
   const [username, setUsername] = useState<string>('')
@@ -21,8 +21,8 @@ const LoginPage = () => {
       }, 5000)
     }
     const loginResponse = await axios.post(`${process.env.REACT_APP_CHAT_API}/api/users/login`, {
-      username: username,
-      password: password,
+      username,
+      password,
     })
     console.log(loginResponse)
     if (loginResponse && loginResponse.status === 200) {
