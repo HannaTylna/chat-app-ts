@@ -17,6 +17,7 @@ export default function ChatRoomPage() {
   const [currentUser, setCurrentUser] = useState<string>('')
 
   useEffect(() => {
+    getCurrentUser()
     const interval = setInterval(() => {
       fetchMessages()
         .then(setMessages)
@@ -32,13 +33,18 @@ export default function ChatRoomPage() {
     return response.data
   }
 
+  const getCurrentUser = async (): Promise<void> => {
+    const response = await axios.get('/api/users/userInfo')
+    console.log(response.data.username)
+    setCurrentUser(response.data.username)
+  }
+
   const sendMessage = async () => {
     setMessage('')
     const msg: messageType = {
       text: message,
     }
-    const response = await axios.post('/api/messages/send', msg)
-    setCurrentUser(response.data.currentUser)
+    await axios.post('/api/messages/send', msg)
   }
 
   const MessageItem = (props: { message: any }) => {
