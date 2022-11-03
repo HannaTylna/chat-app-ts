@@ -13,7 +13,6 @@ function LoginPage() {
   const [message, setMessage] = useState<string>('')
 
   const performLogin = async (): Promise<void> => {
-    console.log('sign up')
     if (!username || !password) {
       setMessage('name, password are required')
       setTimeout(() => {
@@ -24,7 +23,6 @@ function LoginPage() {
       username,
       password,
     })
-    console.log(loginResponse)
     if (loginResponse && loginResponse.status === 200) {
       localStorage.setItem('chatapp', loginResponse.data.token)
 

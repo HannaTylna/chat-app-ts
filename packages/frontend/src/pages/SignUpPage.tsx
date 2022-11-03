@@ -14,11 +14,12 @@ function SignUpPage() {
   const [message, setMessage] = useState<string>('')
   const [mailerror, setMailError] = useState<string | null>()
 
-  function isValidEmail(email: string) {
+  function isValidEmail() {
     return /\S+@\S+\.\S+/.test(email)
   }
+  // eslint-disable-next-line
   const handleMailChange = (event: any) => {
-    if (!isValidEmail(event.target.value)) {
+    if (!isValidEmail()) {
       setMailError('Email is invalid')
     } else {
       setMailError('')
