@@ -8,8 +8,6 @@ import SignUpPage from './pages/SignUpPage'
 function App() {
   return (
     <div className='App'>
-      <h1>frontend</h1>
-
       <Routes>
         <Route path='/' element={<SignUpPage />} />
         <Route path='/login' element={<LoginPage />} />

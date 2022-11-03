@@ -30,7 +30,7 @@ function LoginPage() {
     }
   }
   return (
-    <>
+    <div className='mt-5 mb-5'>
       <h1>KIKI EXPRESS CHAT APP 📨</h1>
       <Container>
         <Row>
@@ -38,6 +38,7 @@ function LoginPage() {
             <StyledFormDiv>
               <h2>LOG IN</h2>
               <label htmlFor='username'>Username</label>
+
               <input
                 id='username'
                 type='text'
@@ -56,13 +57,13 @@ function LoginPage() {
               />
 
               <div>
-                <ReactBubblyEffectButton text='LOG IN' bgColor='#4a3492' onClick={performLogin} />
+                <ReactBubblyEffectButton text='LOGIN' bgColor='#4a3492' onClick={performLogin} />
               </div>
 
               <p>
                 not signup yet?
                 <Button variant='info' onClick={() => navigate('/')}>
-                  signup
+                  SING UP
                 </Button>
               </p>
             </StyledFormDiv>
@@ -70,7 +71,7 @@ function LoginPage() {
           <Col md={2}>{message && <Alert variant='danger'>{message}</Alert>}</Col>
         </Row>
       </Container>
-    </>
+    </div>
   )
 }
 export default LoginPage

@@ -48,7 +48,7 @@ function SignUpPage() {
     }
   }
   return (
-    <>
+    <div className='mt-5 mb-5'>
       <h1>KIKI EXPRESS CHAT APP 📨</h1>
       <Container>
         <Row>
@@ -89,7 +89,7 @@ function SignUpPage() {
               <p>
                 already user?
                 <Button variant='info' onClick={() => navigate('/login')}>
-                  login
+                  LOGIN
                 </Button>
               </p>
             </StyledFormDiv>
@@ -97,7 +97,7 @@ function SignUpPage() {
           <Col md={2}>{message && <Alert variant='danger'>{message}</Alert>}</Col>
         </Row>
       </Container>
-    </>
+    </div>
   )
 }
 export default SignUpPage
