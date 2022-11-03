@@ -12,4 +12,5 @@ jobs:
       - name: Install modules
         run: npm install
       - name: Run ESLint
-        run: npm run lint -w backend
+        run: npm run lint -w packages/backend
+        run: npm run lint -w packages/frontend
