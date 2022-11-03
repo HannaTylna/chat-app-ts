@@ -18,8 +18,7 @@ jobs:
       - name: Install packages
         working-directory: packages/backend
         run: npm ci
-      - name: Linting and tests
+      - name: Linting
         working-directory: packages/backend
         run: |
           npm run lint
-          npm run test
