@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { Message } from '../../../shared/src/messageInterface'
 import axios from 'axios'
 import { Button, Col, Container, Form, InputGroup, Row } from 'react-bootstrap'
 import SimpleBar from 'simplebar-react'
+import { Message } from '@chat-app/shared/src/messageInterface'
 import '../index.css'
 import 'simplebar-react/dist/simplebar.min.css'
 import { dateTimeFormat } from '../util/datetimeFormat'
 
-interface messageType {
+interface MessageType {
   text: string
 }
 
@@ -17,38 +17,39 @@ export default function ChatRoomPage() {
   const [error, setError] = useState<string | undefined>()
   const [currentUser, setCurrentUser] = useState<string>('')
 
-  useEffect(() => {
-    getCurrentUser()
-    const interval = setInterval(() => {
-      fetchMessages()
-        .then(setMessages)
-        .catch((error) => {
-          setMessages([])
-          setError('failed to fetch messages')
-        })
-    }, 2000) // TODO back 1000
-    return () => clearInterval(interval)
-  }, [])
-  const fetchMessages = async (): Promise<Message[]> => {
-    const response = await axios.get<Message[]>('/api/messages/')
-    return response.data
-  }
-
   const getCurrentUser = async (): Promise<void> => {
     const response = await axios.get('/api/users/userInfo')
 
     setCurrentUser(response.data.username)
   }
 
+  const fetchMessages = async (): Promise<Message[]> => {
+    const response = await axios.get<Message[]>('/api/messages/')
+    return response.data
+  }
+
+  useEffect(() => {
+    getCurrentUser()
+    const interval = setInterval(() => {
+      fetchMessages()
+        .then(setMessages)
+        .catch((err) => {
+          setMessages([])
+          setError('failed to fetch messages')
+        })
+    }, 2000) // TODO back 1000
+    return () => clearInterval(interval)
+  }, [])
+
   const sendMessage = async () => {
     setMessage('')
-    const msg: messageType = {
+    const msg: MessageType = {
       text: message,
     }
     await axios.post('/api/messages/send', msg)
   }
 
-  const MessageItem = (props: { message: any }) => {
+  function MessageItem(props: { message: any }) {
     const formatedDatetime = dateTimeFormat(props.message.createdAt)
     return (
       <>
