@@ -33,3 +33,17 @@ export const loginUser = async (req: JwtRequest<Credentials>, res: Response) => 
   const token = createJwtToken(credentials)
   res.status(200).json({ token })
 }
+
+export const getUserInfo = async (req: JwtRequest<Credentials>, res: Response): Promise<void> => {
+  {
+    const userName = req.jwt?.username
+    try {
+      const currentUser = await UserModel.findOne({
+        username: userName,
+      }).exec()
+      res.status(200).json(currentUser)
+    } catch (error) {
+      res.status(400).send(error)
+    }
+  }
+}

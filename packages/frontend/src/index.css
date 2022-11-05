@@ -10,3 +10,32 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+.chat-main {
+  background-image: url('https://images.unsplash.com/photo-1477414348463-c0eb7f1359b6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjU5fHxuYXR1cmV8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60');
+  /* background-repeat: no-repeat; */
+  background-size: cover;
+  border-radius: 10px;
+  margin: 50px;
+}
+.bubble-left {
+  text-align: center;
+  float: left;
+  background-color: #1fddff;
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  color: white;
+  line-height: 50px;
+  margin-bottom: 0;
+}
+.bubble-right {
+  text-align: center;
+  float: right;
+  background-color: #ff4b1f;
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  color: white;
+  line-height: 50px;
+  margin-bottom: 0;
+}

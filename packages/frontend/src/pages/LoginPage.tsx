@@ -19,7 +19,7 @@ function LoginPage() {
         setMessage('')
       }, 5000)
     }
-    const loginResponse = await axios.post(`${process.env.REACT_APP_CHAT_API}/api/users/login`, {
+    const loginResponse = await axios.post('/api/users/login', {
       username,
       password,
     })
