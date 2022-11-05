@@ -5,6 +5,7 @@ import { Button, Col, Container, Form, InputGroup, Row } from 'react-bootstrap'
 import SimpleBar from 'simplebar-react'
 import '../index.css'
 import 'simplebar-react/dist/simplebar.min.css'
+import { dateTimeFormat } from '../util/datetimeFormat'
 
 interface messageType {
   text: string
@@ -48,10 +49,7 @@ export default function ChatRoomPage() {
   }
 
   const MessageItem = (props: { message: any }) => {
-    const datetime = new Date(props.message.createdAt)
-    const formatedDatetime =
-      datetime.getHours() + ':' + datetime.getMinutes() + ', ' + datetime.toDateString()
-
+    const formatedDatetime = dateTimeFormat(props.message.createdAt)
     return (
       <>
         {props.message.sender === currentUser ? (
