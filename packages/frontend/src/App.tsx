@@ -15,7 +15,7 @@ axios.interceptors.request.use((config) => {
   }
   const jwt = localStorage.getItem('chatapp')
   if (jwt) {
-    config.headers['authorization'] = `Bearer ${jwt}`
+    config.headers.authorization = `Bearer ${jwt}`
   }
   return config
 })
