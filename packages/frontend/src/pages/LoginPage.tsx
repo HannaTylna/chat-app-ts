@@ -1,11 +1,11 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import ReactBubblyEffectButton from 'react-bubbly-effect-button'
 import axios from 'axios'
 import { Container, Row, Col, Alert, Button } from 'react-bootstrap'
-import { StyledFormDiv } from '../styles/StyledFormDiv'
 import { useNavigate } from 'react-router-dom'
+import { StyledFormDiv } from '../styles/StyledFormDiv'
 
-const LoginPage = () => {
+function LoginPage() {
   const navigate = useNavigate()
 
   const [username, setUsername] = useState<string>('')
@@ -13,7 +13,6 @@ const LoginPage = () => {
   const [message, setMessage] = useState<string>('')
 
   const performLogin = async (): Promise<void> => {
-    console.log('sign up')
     if (!username || !password) {
       setMessage('name, password are required')
       setTimeout(() => {
@@ -21,10 +20,9 @@ const LoginPage = () => {
       }, 5000)
     }
     const loginResponse = await axios.post('/api/users/login', {
-      username: username,
-      password: password,
+      username,
+      password,
     })
-    console.log(loginResponse)
     if (loginResponse && loginResponse.status === 200) {
       localStorage.setItem('chatapp', loginResponse.data.token)
 
@@ -32,23 +30,26 @@ const LoginPage = () => {
     }
   }
   return (
-    <>
+    <div className='mt-5 mb-5'>
       <h1>KIKI EXPRESS CHAT APP 📨</h1>
       <Container>
         <Row>
           <Col md={{ span: 6, offset: 3 }}>
             <StyledFormDiv>
               <h2>LOG IN</h2>
-              <label>Username</label>
+              <label htmlFor='username'>Username</label>
+
               <input
+                id='username'
                 type='text'
                 value={username}
                 placeholder='Enter username'
                 onChange={(e) => setUsername(e.target.value)}
               />
 
-              <label>Password</label>
+              <label htmlFor='password'>Password</label>
               <input
+                id='password'
                 type='password'
                 placeholder='Password'
                 value={password}
@@ -56,13 +57,13 @@ const LoginPage = () => {
               />
 
               <div>
-                <ReactBubblyEffectButton text='LOG IN' bgColor='#4a3492' onClick={performLogin} />
+                <ReactBubblyEffectButton text='LOGIN' bgColor='#4a3492' onClick={performLogin} />
               </div>
 
               <p>
                 not signup yet?
                 <Button variant='info' onClick={() => navigate('/')}>
-                  signup
+                  SING UP
                 </Button>
               </p>
             </StyledFormDiv>
@@ -70,7 +71,7 @@ const LoginPage = () => {
           <Col md={2}>{message && <Alert variant='danger'>{message}</Alert>}</Col>
         </Row>
       </Container>
-    </>
+    </div>
   )
 }
 export default LoginPage

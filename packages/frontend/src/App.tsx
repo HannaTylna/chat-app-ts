@@ -1,12 +1,12 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
+import axios from 'axios'
 import './App.css'
+import { Container } from 'react-bootstrap'
 import LoginPage from './pages/LoginPage'
 
 import SignUpPage from './pages/SignUpPage'
 import ChatRoomPage from './pages/ChatRoomPage'
-import { Container } from 'react-bootstrap'
-import axios from 'axios'
 
 axios.defaults.baseURL = process.env.REACT_APP_CHAT_API || 'http://localhost:4000'
 axios.interceptors.request.use((config) => {
