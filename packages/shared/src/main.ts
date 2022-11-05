@@ -1,3 +1,3 @@
-export { User } from './userInterface'
-export { Message } from './messageInterface'
-export { Credentials } from './credentialsInterface'
+export type { User } from './userInterface'
+export type { Message } from './messageInterface'
+export type { Credentials } from './credentialsInterface'
