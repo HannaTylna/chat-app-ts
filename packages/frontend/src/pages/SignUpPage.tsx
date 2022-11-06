@@ -60,7 +60,7 @@ function SignUpPage() {
               <input
                 id='username'
                 type='text'
-                value={username}
+                value={username.toLowerCase()}
                 placeholder='Enter username'
                 onChange={(e) => setUsername(e.target.value)}
               />
