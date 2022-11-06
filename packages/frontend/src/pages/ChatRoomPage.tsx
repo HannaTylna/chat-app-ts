@@ -55,15 +55,15 @@ export default function ChatRoomPage() {
       <Row>
         <Col>
           {error && error}
-          <InputGroup>
+          <InputGroup className='mb-3'>
             <Form.Control
-              placeholder='what are you thinking'
+              placeholder='What are you thinking....'
               type='text'
               value={message}
               onChange={(e) => setMessage(e.target.value)}
             />
             <Button variant='danger' onClick={sendMessage}>
-              send
+              SEND
             </Button>
           </InputGroup>
         </Col>
