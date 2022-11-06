@@ -26,7 +26,7 @@ export function MessageItem(props: MessageProps) {
 
   return (
     <main>
-      {sender !== currentUser ? (
+      {sender.toLowerCase() !== currentUser ? (
         <Row className='m-3'>
           <Col className='bg-light rounded' md={{ span: 4 }}>
             <p className='fw-light bubble-left mt-1'>{sender}</p>
