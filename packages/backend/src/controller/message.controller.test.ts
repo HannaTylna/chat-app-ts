@@ -11,6 +11,6 @@ describe('get all messages from database', () => {
     expect(messages).toEqual(expect.arrayContaining(messages))
   })
   afterAll(async () => {
-    mongoose.disconnect()
+    mongoose.connection.close()
   })
 })
