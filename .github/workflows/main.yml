@@ -22,6 +22,8 @@ jobs:
         working-directory: packages/backend
         run: |
           npm run lint
+      - name: testing
+        run: npm run test -w backend
   frontend:
     name: Frontend service
     runs-on: ubuntu-latest
