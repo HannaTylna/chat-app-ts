@@ -4,7 +4,8 @@ import { JwtRequest } from '../middleware/auth'
 
 export const getAllMessages = async (req: Request, res: Response) => {
   try {
-    res.status(200).json(await allMessages())
+    res.status(200)
+    res.json(await allMessages())
   } catch (error) {
     res.status(200).json(error)
   }
