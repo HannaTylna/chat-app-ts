@@ -41,3 +41,5 @@ jobs:
         working-directory: packages/frontend
         run: |
           npm run lint
+        - name: testing
+        run: npm run test -w frontend
