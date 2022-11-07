@@ -14,7 +14,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v2
         with:
-          node-version: '12.x'
+          node-version: '16.x'
       - name: Install packages
         working-directory: packages/backend
         run: npm ci
@@ -32,7 +32,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v2
         with:
-          node-version: '12.x'
+          node-version: '16.x'
       - name: Install packages
         working-directory: packages/frontend
         run: npm ci
