@@ -7,6 +7,11 @@ import '../index.css'
 import 'simplebar-react/dist/simplebar.min.css'
 import MessageList from '../components/MessageList'
 
+export const fetchMessages = async (): Promise<Message[]> => {
+  const response = await axios.get<Message[]>('/api/messages/')
+  return response.data
+}
+
 export default function ChatRoomPage() {
   const [messages, setMessages] = useState<Message[]>([])
   const [message, setMessage] = useState('')
@@ -16,11 +21,6 @@ export default function ChatRoomPage() {
   const getCurrentUser = async (): Promise<void> => {
     const response = await axios.get('/api/users/userInfo')
     setCurrentUser(response.data.username)
-  }
-
-  const fetchMessages = async (): Promise<Message[]> => {
-    const response = await axios.get<Message[]>('/api/messages/')
-    return response.data
   }
 
   useEffect(() => {
