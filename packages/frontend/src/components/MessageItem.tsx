@@ -4,8 +4,6 @@ import { useState, useEffect } from 'react'
 import { Row, Col } from 'react-bootstrap'
 import { dateTimeFormat } from '../util/datetimeFormat'
 
-// import { getCurrentUser } from './CurrentUser'
-
 type MessageProps = {
   messageitem: Message
 }

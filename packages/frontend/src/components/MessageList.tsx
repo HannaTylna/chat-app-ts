@@ -10,7 +10,8 @@ export default function MessageList(props: MessageProps) {
   return (
     <div>
       {props.messages.map((messageitem) => {
-        return <MessageItem messageitem={messageitem} />
+        // eslint-disable-next-line no-underscore-dangle
+        return <MessageItem key={messageitem._id} messageitem={messageitem} />
       })}
     </div>
   )

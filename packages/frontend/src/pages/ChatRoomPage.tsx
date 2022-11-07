@@ -6,6 +6,7 @@ import { Message } from '@chat-app/shared/src/messageInterface'
 import '../index.css'
 import 'simplebar-react/dist/simplebar.min.css'
 import MessageList from '../components/MessageList'
+import NavBar from '../components/Navbar'
 
 export default function ChatRoomPage() {
   const [messages, setMessages] = useState<Message[]>([])
@@ -47,27 +48,30 @@ export default function ChatRoomPage() {
     await axios.post('/api/messages/send', msg)
   }
   return (
-    <Container className='chat-main'>
-      <SimpleBar style={{ height: 800 }} className='pl-5 pr-5'>
-        <MessageList messages={messages} />
-      </SimpleBar>
+    <>
+      <NavBar currentUser={currentUser} />
+      <Container className='chat-main'>
+        <SimpleBar style={{ height: 800 }} className='pl-5 pr-5'>
+          <MessageList messages={messages} />
+        </SimpleBar>
 
-      <Row>
-        <Col>
-          {error && error}
-          <InputGroup>
-            <Form.Control
-              placeholder='what are you thinking'
-              type='text'
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-            />
-            <Button variant='danger' onClick={sendMessage}>
-              send
-            </Button>
-          </InputGroup>
-        </Col>
-      </Row>
-    </Container>
+        <Row>
+          <Col>
+            {error && error}
+            <InputGroup>
+              <Form.Control
+                placeholder='what are you thinking'
+                type='text'
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+              />
+              <Button variant='danger' onClick={sendMessage}>
+                send
+              </Button>
+            </InputGroup>
+          </Col>
+        </Row>
+      </Container>
+    </>
   )
 }
