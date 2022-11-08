@@ -9,8 +9,8 @@ type MessageProps = {
 export default function MessageList(props: MessageProps) {
   return (
     <div>
-      {props.messages.map((messageitem) => {
-        return <MessageItem messageitem={messageitem} />
+      {props.messages.map((messageItem) => {
+        return <MessageItem messageItem={messageItem} />
       })}
     </div>
   )

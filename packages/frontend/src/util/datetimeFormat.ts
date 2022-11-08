@@ -1,8 +1,8 @@
 export const dateTimeFormat = (date: string): string => {
-  const datetime = new Date(date)
-  const hour = datetime.getHours() < 10 ? `0${datetime.getHours()}` : datetime.getHours()
-  const minute = datetime.getMinutes() < 10 ? `0${datetime.getMinutes()}` : datetime.getMinutes()
-  const dateformat = datetime.toDateString()
-  const formatedDatetime = `${hour}:${minute}, ${dateformat}`
-  return formatedDatetime
+  const dateTime = new Date(date)
+  const hour = dateTime.getHours() < 10 ? `0${dateTime.getHours()}` : dateTime.getHours()
+  const minute = dateTime.getMinutes() < 10 ? `0${dateTime.getMinutes()}` : dateTime.getMinutes()
+  const dateformat = dateTime.toDateString()
+  const formattedDateTime = `${hour}:${minute}, ${dateformat}`
+  return formattedDateTime
 }
