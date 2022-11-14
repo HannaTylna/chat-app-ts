@@ -2,7 +2,6 @@ import { Message } from '@chat-app/shared'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { Row, Col } from 'react-bootstrap'
-import { dateTimeFormat } from '../util/datetimeFormat'
 
 type MessageProps = {
   messageItem: Message
@@ -11,7 +10,11 @@ export function MessageItem(props: MessageProps) {
   const [currentUser, setCurrentUser] = useState<string>('')
   // eslint-disable-next-line react/destructuring-assignment
   const { text, sender, createdAt } = props.messageItem
-  const formattedDateTime = dateTimeFormat(createdAt)
+  const date = new Date(createdAt)
+  const formattedDateTime = new Intl.DateTimeFormat('en-US', {
+    dateStyle: 'short',
+    timeStyle: 'short',
+  }).format(date)
 
   const getUser = async () => {
     const response = await axios.get('/api/users/userInfo')
